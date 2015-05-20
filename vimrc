@@ -46,6 +46,11 @@ let g:syntastic_check_on_save = 1
 "hi SyntasticWarningSign ctermfg=220
 
 NeoBundle 'slim-template/vim-slim.git'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'mxw/vim-jsx'
+"NeoBundle 'cakebaker/scss-syntax'
+NeoBundle 'hail2u/vim-css3-syntax'
 
 " Required:
 call neobundle#end()

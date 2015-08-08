@@ -28,7 +28,7 @@ NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
 NeoBundle 'tpope/vim-rails'
 
-NeoBundle 'scrooloose/syntastic'
+
 let g:syntastic_mode_map = { 'mode': 'passive',
             \ 'active_filetypes': ['ruby', 'javascript','coffee', 'scss'] }
 let g:syntastic_ruby_checkers = ['rubocop'] " or ['rubocop', 'mri']
@@ -49,6 +49,7 @@ NeoBundle 'slim-template/vim-slim.git'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'mxw/vim-jsx'
+NeoBundle 'moll/vim-node'
 "NeoBundle 'cakebaker/scss-syntax'
 NeoBundle 'hail2u/vim-css3-syntax'
 

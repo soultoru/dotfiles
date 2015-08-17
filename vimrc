@@ -28,7 +28,6 @@ NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
 NeoBundle 'tpope/vim-rails'
 
-NeoBundle 'scrooloose/syntastic'
 let g:syntastic_mode_map = { 'mode': 'passive',
             \ 'active_filetypes': ['ruby', 'javascript','coffee', 'scss'] }
 let g:syntastic_ruby_checkers = ['rubocop'] " or ['rubocop', 'mri']
@@ -44,13 +43,18 @@ let g:syntastic_check_on_save = 1
 "let g:syntastic_check_on_wq = 1
 "hi SyntasticErrorSign ctermfg=160
 "hi SyntasticWarningSign ctermfg=220
+let g:syntastic_javascript_checkers = ['eslint']
 
 NeoBundle 'slim-template/vim-slim.git'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'mxw/vim-jsx'
+NeoBundle 'moll/vim-node'
+NeoBundle 'digitaltoad/vim-jade'
 "NeoBundle 'cakebaker/scss-syntax'
 NeoBundle 'hail2u/vim-css3-syntax'
+
+NeoBundle 'scrooloose/syntastic'
 
 " Required:
 call neobundle#end()
@@ -67,8 +71,8 @@ set shiftwidth=2
 set softtabstop=2
 set tabstop=2
 set list
-set listchars=tab:>.,trail:_,eol:↲,extends:>,precedes:<,nbsp:%
-
+set listchars=tab:>.,trail:_,extends:>,precedes:<,nbsp:%,eol:$
+   
 function! ZenkakuSpace()
   highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
 endfunction

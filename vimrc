@@ -71,7 +71,8 @@ set shiftwidth=2
 set softtabstop=2
 set tabstop=2
 set list
-set listchars=tab:>.,trail:_,extends:>,precedes:<,nbsp:%,eol:$
+"set listchars=tab:>.,trail:_,extends:>,precedes:<,nbsp:%,eol:$
+set listchars=tab:>.,trail:_,extends:>,precedes:<,nbsp:%
    
 function! ZenkakuSpace()
   highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
@@ -90,3 +91,9 @@ set number
 set whichwrap=b,s,h,l,<,>,[,],~
 set incsearch
 set hlsearch
+
+
+set termencoding=utf-8
+set encoding=utf-8
+"set fileencoding=utf-8
+"set fileencodings=iso-2022-jp,euc-jp,utf-8,ucs2le,ucs-2

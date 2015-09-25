@@ -46,7 +46,8 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(git)
-plugins=(git ruby gem rails zsh-syntax-highlighting)
+plugins=(git ruby rails command-not-found bundler cap compleat dirhistory gem git-flow npm pip)
+
 
 # User configuration
 

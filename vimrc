@@ -7,9 +7,7 @@ if has('vim_starting')
 
   " Required:
   set runtimepath+=/home/ubuntu/.vim/bundle/neobundle.vim/
-endif
-
-" Required:
+endif " Required:
 call neobundle#begin(expand('/home/ubuntu/.vim/bundle'))
 
 " Let NeoBundle manage NeoBundle
@@ -27,6 +25,8 @@ NeoBundle 'flazz/vim-colorschemes'
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
 NeoBundle 'tpope/vim-rails'
+NeoBundle 'Shougo/unite.vim'
+
 
 let g:syntastic_mode_map = { 'mode': 'passive',
             \ 'active_filetypes': ['ruby', 'javascript','coffee', 'scss'] }
@@ -97,3 +97,7 @@ set termencoding=utf-8
 set encoding=utf-8
 "set fileencoding=utf-8
 "set fileencodings=iso-2022-jp,euc-jp,utf-8,ucs2le,ucs-2
+
+if !exists('loaded_matchit')
+  runtime macros/matchit.vim
+endif

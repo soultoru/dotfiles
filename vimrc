@@ -6,9 +6,9 @@ if has('vim_starting')
 "  endif
 
   " Required:
-  set runtimepath+=/home/ubuntu/.vim/bundle/neobundle.vim/
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif " Required:
-call neobundle#begin(expand('/home/ubuntu/.vim/bundle'))
+call neobundle#begin(expand('~/.vim/bundle'))
 
 " Let NeoBundle manage NeoBundle
 " Required:
@@ -29,7 +29,7 @@ NeoBundle 'Shougo/unite.vim'
 
 
 let g:syntastic_mode_map = { 'mode': 'passive',
-            \ 'active_filetypes': ['ruby', 'javascript','coffee', 'scss'] }
+            \ 'active_filetypes': ['ruby', 'javascript','coffee', 'scss', 'slim'] }
 let g:syntastic_ruby_checkers = ['rubocop'] " or ['rubocop', 'mri']
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_save = 1
@@ -44,6 +44,7 @@ let g:syntastic_check_on_save = 1
 "hi SyntasticErrorSign ctermfg=160
 "hi SyntasticWarningSign ctermfg=220
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_slim_checkers = ['slim_lint']
 
 NeoBundle 'slim-template/vim-slim.git'
 NeoBundle 'kchmck/vim-coffee-script'

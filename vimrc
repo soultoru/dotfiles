@@ -56,6 +56,7 @@ NeoBundle 'moll/vim-node'
 NeoBundle 'digitaltoad/vim-jade'
 "NeoBundle 'cakebaker/scss-syntax'
 NeoBundle 'hail2u/vim-css3-syntax'
+NeoBundle 'vim-ruby/vim-ruby'
 
 NeoBundle 'scrooloose/syntastic'
 
@@ -81,6 +82,8 @@ function! ZenkakuSpace()
   highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
 endfunction
    
+syntax enable
+
 if has('syntax')
   augroup ZenkakuSpace
     autocmd!

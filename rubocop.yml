@@ -1,0 +1,18 @@
+AllCops:
+  Exclude:
+    - 'bin/**'
+    - 'db/**/*'
+    - 'vendor/**/*'
+  TargetRubyVersion: 2.3
+Rails:
+  Enabled: true
+Style/TrailingCommaInLiteral:
+  EnforcedStyleForMultiline: comma
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+# AsciiComments:
+#   Enabled: false
+ClassLength:
+  CountComments: false
+Style/FormatString:
+  EnforcedStyle: percent

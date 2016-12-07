@@ -103,6 +103,8 @@ set termencoding=utf-8
 set encoding=utf-8
 "set fileencoding=utf-8
 "set fileencodings=iso-2022-jp,euc-jp,utf-8,ucs2le,ucs-2
+syntax enable
+set autoindent
 
 if !exists('loaded_matchit')
   runtime macros/matchit.vim

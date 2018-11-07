@@ -28,11 +28,14 @@ NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'prettier/vim-prettier'
+NeoBundle 'w0rp/ale'
 
 
 let g:syntastic_mode_map = { 'mode': 'passive',
-            \ 'active_filetypes': ['ruby', 'javascript','coffee', 'scss', 'slim'] }
+            \ 'active_filetypes': ['ruby', 'javascript','coffee', 'slim'] }
 let g:syntastic_ruby_checkers = ['rubocop'] " or ['rubocop', 'mri']
+let g:syntastic_vue_checkers = ['prettier'] " or ['rubocop', 'mri']
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_save = 1
 "let g:syntastic_javascript_checkers = ['jshint']
@@ -45,15 +48,23 @@ let g:syntastic_check_on_save = 1
 "let g:syntastic_check_on_wq = 1
 "hi SyntasticErrorSign ctermfg=160
 "hi SyntasticWarningSign ctermfg=220
-let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_slim_checkers = ['slim_lint']
+let g:ale_fixers = {
+      \   'vue': ['prettier'],
+      \   'javascript': ['prettier'],
+      \   'css': ['prettier'],
+      \}
+let g:ale_fix_on_save = 1
+
 
 NeoBundle 'slim-template/vim-slim.git'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'mxw/vim-jsx'
+"jNeoBundle 'mxw/vim-jsx'
 NeoBundle 'moll/vim-node'
-NeoBundle 'digitaltoad/vim-jade'
+NeoBundle 'posva/vim-vue'
+NeoBundle 'digitaltoad/vim-pug'
+"NeoBundle 'digitaltoad/vim-jade'
 "NeoBundle 'cakebaker/scss-syntax'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'vim-ruby/vim-ruby'

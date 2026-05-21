@@ -46,7 +46,7 @@ ZSH_THEME="ys"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(git)
-plugins=(docker docker-compose git ruby rails command-not-found bundler compleat dirhistory gem git-flow npm pip)
+plugins=(docker docker-compose git ruby rails command-not-found bundler compleat dirhistory gem git-flow npm pip direnv)
 
 # User configuration
 
@@ -83,5 +83,9 @@ source $ZSH/oh-my-zsh.sh
 alias grep='grep --color=always'
 #export LESS='-gj10 --no-init --quit-if-one-screen -R'
 export LESS='-Rgj10'
-export LESSOPEN='| /usr/share/source-highlight/src-hilite-lesspipe.sh %s'
+#export LESSOPEN='| /usr/share/source-highlight/src-hilite-lesspipe.sh %s'
+export LESSOPEN='| /usr/bin/source-highlight --failsafe --src-lang=%s --out-format=esc -i %s'
+
+# Created by `pipx` on 2023-02-10 02:41:53
 export PATH="$HOME/.local/bin:$PATH"
+export EDITOR=/usr/bin/vim

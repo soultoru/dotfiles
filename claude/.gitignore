@@ -1,0 +1,11 @@
+*
+!.gitignore
+!*.md
+!settings.json
+!skills/
+!skills/**/
+!skills/**/*.md
+!agents/
+!agents/*.md
+!agents/**/
+!agents/**/*.md

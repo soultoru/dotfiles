@@ -5,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+ZSH_THEME="ys"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -46,8 +46,7 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(git)
-plugins=(git ruby rails command-not-found bundler cap compleat dirhistory gem git-flow npm pip)
-
+plugins=(docker docker-compose git ruby rails command-not-found bundler compleat dirhistory gem git-flow npm pip)
 
 # User configuration
 
@@ -85,3 +84,4 @@ alias grep='grep --color=always'
 #export LESS='-gj10 --no-init --quit-if-one-screen -R'
 export LESS='-Rgj10'
 export LESSOPEN='| /usr/share/source-highlight/src-hilite-lesspipe.sh %s'
+export PATH="$HOME/.local/bin:$PATH"

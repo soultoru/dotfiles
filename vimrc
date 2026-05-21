@@ -30,7 +30,8 @@ NeoBundle 'tpope/vim-rails'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'prettier/vim-prettier'
 NeoBundle 'w0rp/ale'
-
+NeoBundle 'leafgarland/typescript-vim'
+NeoBundle 'peitalin/vim-jsx-typescript'
 
 let g:syntastic_mode_map = { 'mode': 'passive',
             \ 'active_filetypes': ['ruby', 'javascript','coffee', 'slim'] }
@@ -120,3 +121,7 @@ set autoindent
 if !exists('loaded_matchit')
   runtime macros/matchit.vim
 endif
+
+
+" set filetypes as typescriptreact
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact

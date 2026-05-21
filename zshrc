@@ -89,3 +89,6 @@ export LESSOPEN='| /usr/bin/source-highlight --failsafe --src-lang=%s --out-form
 # Created by `pipx` on 2023-02-10 02:41:53
 export PATH="$HOME/.local/bin:$PATH"
 export EDITOR=/usr/bin/vim
+
+# dotfiles auto-update
+(cd ~/dotfiles && git pull --ff-only --quiet 2>/dev/null &)

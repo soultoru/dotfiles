@@ -67,9 +67,10 @@
   #
   #  /etc/profiles/per-user/soultoru/etc/profile.d/hm-session-vars.sh
   #
+  programs.vim.enable = true;
   home.sessionVariables = {
     # EDITOR = "emacs";
-    EDITOR = "vim";
+    EDITOR = "{pkgs.vim}vim";
   };
 
   # Let Home Manager install and manage itself.

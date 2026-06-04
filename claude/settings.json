@@ -1,5 +1,5 @@
 {
-  "theme": "dark",
+  "model": "sonnet[1m]",
   "hooks": {
     "PreToolUse": [
       {
@@ -23,5 +23,6 @@
         ]
       }
     ]
-  }
+  },
+  "theme": "dark"
 }

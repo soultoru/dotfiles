@@ -84,7 +84,7 @@ alias grep='grep --color=always'
 #export LESS='-gj10 --no-init --quit-if-one-screen -R'
 export LESS='-Rgj10'
 #export LESSOPEN='| /usr/share/source-highlight/src-hilite-lesspipe.sh %s'
-export LESSOPEN='| /usr/bin/source-highlight --failsafe --src-lang=%s --out-format=esc -i %s'
+# export LESSOPEN='| /usr/bin/source-highlight --failsafe --src-lang=%s --out-format=esc -i %s'
 
 # Created by `pipx` on 2023-02-10 02:41:53
 export PATH="$HOME/.local/bin:$PATH"

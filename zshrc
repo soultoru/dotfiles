@@ -92,3 +92,15 @@ export EDITOR=/usr/bin/vim
 
 # dotfiles auto-update
 (cd ~/dotfiles && git pull --ff-only --quiet 2>/dev/null &)
+
+# PRレビュー自動提出のダイジェスト表示（pr-review-daily skill）
+# 未読分があれば起動時に1度だけ表示し、アーカイブへ退避して既読化する
+_pr_review_inbox="$HOME/.claude-figurout/pr-review-inbox.md"
+if [ -s "$_pr_review_inbox" ]; then
+  printf '\n\033[1;36m── PRレビュー自動提出（未読）──\033[0m\n'
+  cat "$_pr_review_inbox"
+  printf '\033[2m(上記はアーカイブへ退避しました: pr-review-inbox.archive.md)\033[0m\n\n'
+  cat "$_pr_review_inbox" >> "$HOME/.claude-figurout/pr-review-inbox.archive.md"
+  : > "$_pr_review_inbox"
+fi
+unset _pr_review_inbox

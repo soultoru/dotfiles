@@ -73,35 +73,36 @@ gh api /repos/<owner>/<repo>/pulls/<n>/reviews --jq '.[] | select(.user.login=="
   新規指摘 / 推奨アクション（approve相当 / comment / changes requested相当 のいずれか明示）」を返させる。
 - レビューコメントの言語は著者に合わせる（pr-reviewer の規約に従う。日本語話者→日本語、英語話者→英日二重）。
 
-## Step 4: 選択的Submit（自動approve）
+## Step 4: 自動Submit（全件提出）
 
-各エージェントの結果を受け取り、**保守的に**振り分ける。
-
-**自動 Submit（approve）する条件（すべて満たす場合のみ）:**
-- 推奨アクションが明確に **approve 相当**
-- 自分の過去のブロッキング（CHANGES_REQUESTED）指摘が**全解消**されている、
-  または元々ブロッキングが無い
-- 新規指摘が **Nit / 任意（非ブロッカー）のみ**（要修正・要確認・changes requested 相当が無い）
-- 自動approveに含まれるNitコメントに「別PR検討」の一文が入っていること（無ければ
-  Submit前に当該コメント本文へ追記してから提出）
-
-自動approveの提出（既存Pending下書きをそのまま提出）:
+各エージェントの結果を受け取り、**推奨アクションに応じた event で全件を自動提出**する。
+提出は既存Pending下書きを events エンドポイントでそのまま提出する:
 
 ```bash
-gh api -X POST /repos/<owner>/<repo>/pulls/<n>/reviews/<review_id>/events \
-  -f event=APPROVE
+gh api -X POST /repos/<owner>/<repo>/pulls/<n>/reviews/<review_id>/events -f event=<EVENT>
 ```
 
-CHANGES_REQUESTED がブロッキングのまま残っていたPRをこの自動approveで提出すると、
-ブロックが解除される（これは意図した挙動）。
+**event の振り分け:**
 
-**下書き（Pending）のまま残す条件（いずれか該当）:**
-- 推奨アクションが comment / changes requested 相当
-- 新規に 要修正・要確認 レベルの指摘がある
-- 過去のブロッキング指摘が未解消
-- approve 可否の判断に迷う（迷ったら必ず下書きのまま。安全側に倒す）
+- **APPROVE** — 推奨アクションが approve 相当（過去のブロッキング指摘が全解消、
+  新規は Nit / 任意のみ）。CHANGES_REQUESTED がブロッキングのまま残っていたPRをこれで
+  提出するとブロックが解除される（意図した挙動）。
+- **REQUEST_CHANGES** — **明確で重大なブロッカー**がある場合のみ。具体的には
+  セキュリティ脆弱性・データ破壊/損失・マージするとリグレッション確実な correctness バグ等、
+  「マージ前に必ず直すべき」と断定できるもの。**迷ったら REQUEST_CHANGES にせず COMMENT にする**
+  （マージを止める判断は重い。確信が持てる重大指摘に限定）。
+- **COMMENT** — 上記以外すべて。要確認・要検討・Nit・軽微な指摘など。指摘は届くが
+  マージはブロックしない。
 
-下書きのまま残すものは Submit しない。ユーザーがGitHub UIで確認・編集して提出する。
+**Nitコメントの文面**: APPROVE / COMMENT で提出するレビューに Nit / 任意指摘が含まれる場合、
+各 Nit コメント本文に「ブロッカーではないため、可能なら別PRでの対応をご検討ください」の一文が
+入っていること（pr-reviewer に指示済み）。入っていなければ提出前に追記する。
+
+**提出しない/保留する例外:**
+- エージェントが保存失敗を報告した、推奨アクションが判別不能、review_id が取れない 等の
+  異常時はそのPRだけ提出せず Pending のまま残し、報告で「要手動確認」と明示する。
+
+全件提出が原則だが、REQUEST_CHANGES だけは安全側（確信が持てる重大ブロッカーに限定）に倒す。
 
 ## Step 5: 報告（プレーンURL）
 

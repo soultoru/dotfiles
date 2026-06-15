@@ -104,16 +104,57 @@ gh api -X POST /repos/<owner>/<repo>/pulls/<n>/reviews/<review_id>/events -f eve
 
 全件提出が原則だが、REQUEST_CHANGES だけは安全側（確信が持てる重大ブロッカーに限定）に倒す。
 
-## Step 5: 報告（プレーンURL）
+## Step 5: 報告と通知
 
 ユーザーは CLI 利用のため、**markdownインラインリンクを使わず生URLをそのまま**記載する
-（`feedback_plain_urls_in_cli` メモリ）。次の3区分で報告:
+（`feedback_plain_urls_in_cli` メモリ）。各URLは `#番号 https://...` の形式で1行ずつ。
 
-1. **自動Submit済み（approve）** — PR番号・タイトル・著者・レビューURL・含めたNit件数
-2. **要確認のPending下書き** — PR番号・タイトル・著者・レビューURL・推奨アクション・要注目指摘の要点
+### 5-1. ターミナル出力
+
+次の3区分でプレーンURL報告:
+
+1. **自動Submit済み** — PR番号・タイトル・著者・提出種別（APPROVE / REQUEST_CHANGES / COMMENT）・レビューURL
+2. **保留（要手動確認）** — 異常で提出しなかったPR。理由とレビューURL（あれば）
 3. **対象外（除外）** — PR番号・理由（1行）
 
-各URLは `#番号 https://...` の形式で1行ずつ。最後に「下書き分はGitHub UIで確認・提出を」と一言。
+### 5-2. ローカルダイジェスト（常に追記）
+
+このrunで**1件以上提出した場合のみ**、ダイジェストを追記する（提出ゼロのhourly runは静かにする）。
+`date` で実時刻を付与（このskillは通常のシェルで動くため `date` 使用可）:
+
+```bash
+python3 -c '
+import sys
+lines = sys.argv[1]
+open("/home/soultoru/.claude-figurout/pr-review-inbox.md","a").write(lines)
+' "$(printf "\n## %s 提出 %d件\n%s\n" "$(date "+%Y-%m-%d %H:%M")" "<件数>" "<各行: - [EVENT] #番号 タイトル (著者) URL>")"
+```
+
+（実装は1件ずつ素直に追記してよい。要は追記先 `/home/soultoru/.claude-figurout/pr-review-inbox.md` に
+「日時・提出種別・PR・著者・生URL」が残ること。）
+
+このダイジェストは次にターミナルを開いた時に表示される（zsh ログインフックが
+`pr-review-inbox.md` の未読分を表示し、確認後はユーザーが消すか自動でアーカイブされる想定）。
+
+### 5-3. Slack 通知（提出があった場合のみ）
+
+環境変数 `SLACK_REVIEW_WEBHOOK`（`.envrc` 由来）が設定されていれば、**1件以上提出した場合のみ**
+Incoming Webhook に要約を push する。未設定ならスキップ（エラーにしない）。MCP は使わない
+（ヘッドレスcronで不発のため curl で送る）:
+
+```bash
+[ -n "${SLACK_REVIEW_WEBHOOK:-}" ] && python3 -c '
+import json, os, subprocess
+text = os.environ["MSG"]
+payload = json.dumps({"text": text})
+subprocess.run(["curl","-sS","-X","POST","-H","Content-type: application/json",
+  "--data","@-", os.environ["SLACK_REVIEW_WEBHOOK"]], input=payload, text=True)
+'
+```
+（`MSG` には「PRレビュー自動提出 N件」+ 各行 `EVENT #番号 タイトル URL` を改行区切りで入れる。
+生URLのまま。Slackがリンク化する。）
+
+最後にターミナルへ「Slack通知済み / ダイジェスト追記済み」かどうかも一言添える。
 
 ## 注意
 

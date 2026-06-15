@@ -1,6 +1,6 @@
 ---
 name: pr-review-daily
-description: 毎日のPRレビューを省力化する。自分がレビューすべきオープンPRを横断探索し、各PRを pr-reviewer エージェントで並行レビューしてPending下書きを作成。明確にブロッカー無し=approve相当のものは自動でSubmit、要判断のものは下書きのまま残す。結果はプレーンURLで報告する。Use when the user wants to run their daily PR review pass, "PRレビュー", "今日のPR見て", "daily pr review".
+description: 毎日のPRレビューを省力化する。自分がレビューすべきオープンPRを横断探索し、各PRを pr-reviewer エージェントで並行レビュー。approve相当はAPPROVE・重大ブロッカーはREQUEST_CHANGES・それ以外はCOMMENTとして全件を自動Submitし、結果をターミナル/ローカルダイジェスト/Slack Webhookで通知する。Use when the user wants to run their daily PR review pass, "PRレビュー", "今日のPR見て", "daily pr review".
 ---
 
 # pr-review-daily skill

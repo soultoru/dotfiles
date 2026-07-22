@@ -24,5 +24,8 @@
       }
     ]
   },
-  "theme": "dark"
+  "effortLevel": "medium",
+  "tui": "default",
+  "theme": "dark",
+  "skipAutoPermissionPrompt": true
 }
